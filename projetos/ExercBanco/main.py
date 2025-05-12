@@ -12,7 +12,7 @@ titular = input("Digite o seu nome: ")
 contasBanco.append(ContaCorrente(titular))
 
 while True:
-    condicao = int(input("Digite: \n1- Depositar \n2- Sacar \n3- Transferir \n4- Sair\n"))
+    condicao = int(input("Digite: \n1- Depositar \n2- Sacar \n3- Transferir \n4- Excluir conta \n5- Sair\n"))
     if condicao == 1:
         nome = input("Digite o nome do titular: ")
         conta = ferramentas.buscar_conta(nome, contasBanco)
@@ -48,5 +48,18 @@ while True:
         else:
             print("Conta não encontrada!")
     elif condicao == 4:
+        deletar = input("Digite o nome do seu titular para confirmar a exclusão da conta") 
+        for conta in contasBanco:
+            if deletar == conta.titular:
+                if conta.saldo > 0:
+                    transfere = input(f"Você tem R$:{conta.saldo} precisa transferir este dinheiro para alguma conta, Digite o nome do titular: ")
+                    for conta2 in contasBanco:
+                        if conta2.titular == transfere:
+                            conta.transferir(conta2,conta.saldo)
+                            conta.exibirHistorico()
+                            break
+                contasBanco.remove(conta)
+                break
+    elif condicao == 5:
         print("Saindo do sistema...")
         break
