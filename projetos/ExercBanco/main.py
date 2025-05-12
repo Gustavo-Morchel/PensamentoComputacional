@@ -1,20 +1,12 @@
 from models.ContaCorrente import ContaCorrente
 from utils.ferramentas import Ferramentas
 
-gustavo = ContaCorrente("Gustavo", 1000, 500, [])
-# gustavo.depositar(50)
-# teste = ContaCorrente("Teste", 2000, 500, [])
-
-# # gustavo.depositar(150)
-# # gustavo.sacar(100)
-# # gustavo.exibirHistorico()
-
-# gustavo.transferir(teste, 50)
-
-# gustavo.exibirHistorico()
-# teste.exibirHistorico()
+contaTeste = ContaCorrente("ContaTeste", 500, [], 1000)
 
 contasBanco = []
+contasBanco.append(contaTeste)
+
+ferramentas = Ferramentas()
 
 titular = input("Digite o seu nome: ")
 contasBanco.append(ContaCorrente(titular))
@@ -22,14 +14,39 @@ contasBanco.append(ContaCorrente(titular))
 while True:
     condicao = int(input("Digite: \n1- Depositar \n2- Sacar \n3- Transferir \n4- Sair\n"))
     if condicao == 1:
-        conta = Ferramentas.buscar_conta(input("Digite o nome do titular: "))
-    elif condicao == 2:
-        pass
+        nome = input("Digite o nome do titular: ")
+        conta = ferramentas.buscar_conta(nome, contasBanco)
+        if conta:
+            valor = float(input("Digite o valor a ser depositado: "))
+            conta.depositar(valor)
+            conta.exibirHistorico()
+        else:
+            print("Conta não encontrada!")
+    elif condicao == 2: 
+        nome = input("Digite o nome do titular: ")
+        conta = ferramentas.buscar_conta(nome, contasBanco)
+        if conta:
+            valor = float(input("Digite o valor a ser sacado: "))
+            conta.sacar(valor)
+            conta.exibirHistorico()
+        else:
+            print("Conta não encontrada!")
     elif condicao == 3:
-        pass
+        nome = input("Digite o nome do titular: ")
+        conta = ferramentas.buscar_conta(nome, contasBanco)
+        if conta:
+            valor = float(input("Digite o valor a ser transferido: "))
+            nome_destinatario = input("Digite o nome do destinatário: ")
+            destinatario = ferramentas.buscar_conta(nome_destinatario, contasBanco)
+
+            if destinatario:
+                conta.transferir(destinatario, valor)
+                conta.exibirHistorico()
+                destinatario.exibirHistorico()
+            else:
+                print("Destinatário não encontrado!")
+        else:
+            print("Conta não encontrada!")
     elif condicao == 4:
-        pass
-        
-
-    
-
+        print("Saindo do sistema...")
+        break
