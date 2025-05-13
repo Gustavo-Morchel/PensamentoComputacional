@@ -1,18 +1,28 @@
 from models.ContaCorrente import ContaCorrente
 from utils.ferramentas import Ferramentas
 
-contaTeste = ContaCorrente("ContaTeste", 500, [], 1000)
+contaTeste = ContaCorrente("ContaTeste", 500, [], 1000, [])
 
 contasBanco = []
 contasBanco.append(contaTeste)
-
 ferramentas = Ferramentas()
+i = 0
+listaPix = list()
 
 titular = input("Digite o seu nome: ")
-contasBanco.append(ContaCorrente(titular))
+while i < 3:
+    chave = input(f"Digite sua {i+1}º chave PIX:  ")
+    if chave.len() > 5:
+        listaPix.append(chave)
+        i += 1
+        continue
+    else:
+        print("Chave muito curta ")
+    
+contasBanco.append(ContaCorrente(titular,listaPix))
 
 while True:
-    condicao = int(input("Digite: \n1- Depositar \n2- Sacar \n3- Transferir \n4- Excluir conta \n5- Sair\n"))
+    condicao = int(input("Digite: \n1- Depositar \n2- Sacar \n3- Transferir \n4- Fazer Pix \n5- Excluir conta \n6- Sair\n"))
     if condicao == 1:
         nome = input("Digite o nome do titular: ")
         conta = ferramentas.buscar_conta(nome, contasBanco)
@@ -48,6 +58,9 @@ while True:
         else:
             print("Conta não encontrada!")
     elif condicao == 4:
+        pass
+
+    elif condicao == 5:
         deletar = input("Digite o nome do seu titular para confirmar a exclusão da conta") 
         for conta in contasBanco:
             if deletar == conta.titular:
@@ -60,6 +73,7 @@ while True:
                             break
                 contasBanco.remove(conta)
                 break
-    elif condicao == 5:
+    elif condicao == 6:
         print("Saindo do sistema...")
         break
+
