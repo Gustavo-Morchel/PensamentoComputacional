@@ -1,7 +1,8 @@
 from models.ContaCorrente import ContaCorrente
 from utils.ferramentas import Ferramentas
 
-contaTeste = ContaCorrente("ContaTeste", 500, [], 1000, [])
+contaTeste = ContaCorrente("ContaTeste", ["123456789", "987654321"], 500, [], 0)
+
 
 contasBanco = []
 contasBanco.append(contaTeste)
@@ -12,7 +13,7 @@ listaPix = list()
 titular = input("Digite o seu nome: ")
 while i < 3:
     chave = input(f"Digite sua {i+1}º chave PIX:  ")
-    if chave.len() > 5:
+    if len(chave) > 5:
         listaPix.append(chave)
         i += 1
         continue
@@ -58,7 +59,27 @@ while True:
         else:
             print("Conta não encontrada!")
     elif condicao == 4:
-        pass
+        chave_pix = input("Digite a chave Pix do destinatário: ")
+        destinatario = None
+        for conta in contasBanco:
+            if chave_pix in conta.chavePix: 
+                destinatario = conta
+                break
+        if destinatario:
+            nome = input("Digite o nome do titular da sua conta: ")
+            conta = ferramentas.buscar_conta(nome, contasBanco)
+            if conta:
+                valor = float(input("Digite o valor a ser transferido via Pix: "))
+                if conta.saldo >= valor:
+                    conta.transferir(destinatario, valor)
+                    conta.exibirHistorico()
+                    destinatario.exibirHistorico()
+                else:
+                    print("Saldo insuficiente para realizar o Pix.")
+            else:
+                print("Conta não encontrada!")
+        else:
+            print("Chave Pix não encontrada!")
 
     elif condicao == 5:
         deletar = input("Digite o nome do seu titular para confirmar a exclusão da conta") 

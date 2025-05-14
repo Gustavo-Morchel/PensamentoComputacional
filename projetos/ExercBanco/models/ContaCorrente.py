@@ -4,7 +4,6 @@ class ContaCorrente:
     '''
     OBS: Operações no histórico> 0 - Sacar, 1 - Depositar e 2 - Transferir
     '''
-
     def __init__(self,titular: str, chavePix: list = [], limite: float = 500, historico:list = [], saldo: float = 0) -> None : 
         self.__titular = titular
         self.__saldo = saldo
