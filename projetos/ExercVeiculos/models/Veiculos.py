@@ -27,3 +27,8 @@ class Veiculos:
     def get_placa(self) -> str:
         """Método que retorna a placa do veículo"""
         return self.__placa
+    
+    def setValorFipe(self, valor: float) -> None:
+        """Método que altera o valor do veículo"""
+        self.__valor_fipe = valor
+        return True
