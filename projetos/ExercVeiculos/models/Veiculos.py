@@ -32,3 +32,4 @@ class Veiculos:
         """Método que altera o valor do veículo"""
         self.__valor_fipe = valor
         return True
+
