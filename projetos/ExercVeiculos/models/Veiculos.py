@@ -1,3 +1,5 @@
+import re
+
 class Veiculos:
     """
     Classe com as principais funcionalidade do sistema de veículos
@@ -28,8 +30,17 @@ class Veiculos:
         """Método que retorna a placa do veículo"""
         return self.__placa
     
+    def set_placa(self, nova_placa: str) -> None:
+        """Método que altera a placa do veículo"""
+        if re.match("[A-Z][A-Z][A-Z][0-9][A-Z][0-9][0-9]", nova_placa):
+            self.__placa = nova_placa
+            return True
+
     def setValorFipe(self, valor: float) -> None:
         """Método que altera o valor do veículo"""
         self.__valor_fipe = valor
         return True
 
+    def __eq__(self, outro_veiculo: str) -> bool:
+        """Método que compara a placa do veículo com outra placa"""
+        return self.__placa == outro_veiculo.get_placa()

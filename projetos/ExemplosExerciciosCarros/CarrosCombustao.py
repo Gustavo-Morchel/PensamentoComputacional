@@ -1,4 +1,4 @@
-from .Veiculos import Veiculos
+from ..ExercVeiculos.models.Veiculos import Veiculos
 
 class CarroCombustao(Veiculos):
     """
