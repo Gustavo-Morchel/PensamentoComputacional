@@ -6,7 +6,6 @@ class Frota:
         
         
     def __str__(self) -> str:
-        
         return f"Frota com {len(self.__veiculos_adicionar)} veículos."
     
     def adicionar_veiculo(self, veiculo):

@@ -18,3 +18,11 @@ class VeiculoEletrico(Veiculos):
         """
         consumo_total =  distancia * 0.15 # 0,15 kHw
         return consumo_total
+
+    def recarregar(self) -> None:
+        """
+        Método que recarrega o veículo
+        Entradas: 
+        Saídas: 
+        """
+        print("Recarregando veículo elétrico")
